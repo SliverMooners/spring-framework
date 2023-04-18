@@ -630,11 +630,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			}
 		}
 
-		// Initialize any placeholder property sources in the context environment.
+		// Initialize any placeholder property sources in the context environment. 初始化占位符
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
-		// see ConfigurablePropertyResolver#setRequiredProperties
+		// see ConfigurablePropertyResolver#setRequiredProperties 占位符资源可以解析
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
