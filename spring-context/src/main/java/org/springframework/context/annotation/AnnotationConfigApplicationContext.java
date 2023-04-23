@@ -100,7 +100,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * @param basePackages the packages to scan for component classes
 	 */
 	public AnnotationConfigApplicationContext(String... basePackages) {
-		// 引入reader & scanner, 初始化BeanFactory(DefaultListableBean)
+		// 引入reader & scanner, 初始化BeanFactory(DefaultListableBean), 创建reader的过程之前就应该初始化匹配的environment(不同的环境存存不同的环境变量)
 		this();
 		// 扫描固定package路径下的所有class文件, 查看是否有添加指定注解的class, 添加到BeanDefinitionMap和BeanDefinitionNames(就是一个bean的记录)
 		scan(basePackages);

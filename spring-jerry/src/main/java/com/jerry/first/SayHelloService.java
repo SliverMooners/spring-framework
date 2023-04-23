@@ -1,6 +1,7 @@
 package com.jerry.first;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class SayHelloService {
 
+	@Autowired
+	SayAutowiredHelloService sayAutowiredHelloService;
+
 	public void say() {
 		System.out.println("------------------------");
 		System.out.println("您好, 欢迎使用...");
+		sayAutowiredHelloService.add();
 		System.out.println("------------------------");
 	}
 
