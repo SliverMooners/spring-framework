@@ -11,12 +11,18 @@ import org.springframework.stereotype.Service;
 public class SayHelloService {
 
 	@Autowired
-	SayAutowiredHelloService sayAutowiredHelloService;
+	ISayHelloService sayAutowiredHelloServiceImpl;
+
+	SayHelloSetService sayHelloSetService;
+
+	public void setSayHelloSetService(SayHelloSetService sayHelloSetService) {
+		this.sayHelloSetService = sayHelloSetService;
+	}
 
 	public void say() {
 		System.out.println("------------------------");
 		System.out.println("您好, 欢迎使用...");
-		sayAutowiredHelloService.add();
+		sayAutowiredHelloServiceImpl.add();
 		System.out.println("------------------------");
 	}
 

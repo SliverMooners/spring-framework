@@ -84,10 +84,13 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 					}
 				}
 			}
+			// 反射生成代理, jdk生成代理必须存在接口, 生成代理的时候会继承proxy接口, 而java不能多继承
+			// 感觉jdk和cglib都是通过反射的手段获取当前类的各种属性, 然后进行
 			return BeanUtils.instantiateClass(constructorToUse);
 		}
 		else {
 			// Must generate CGLIB subclass.
+			// cglib生成代理
 			return instantiateWithMethodInjection(bd, beanName, owner);
 		}
 	}
