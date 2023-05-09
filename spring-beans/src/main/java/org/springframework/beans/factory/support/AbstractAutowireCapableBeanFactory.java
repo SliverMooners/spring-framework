@@ -529,7 +529,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			// 可能返回代理的bean, InstantiationAwareBeanPostProcessor 继承BeanPostProcess, BeanPostProcess初始化属性值, InstantiationAwareBeanPostProcessor相当于实例化处理, 两个处于不同的阶段
+			// 返回代理的bean, InstantiationAwareBeanPostProcessor 继承BeanPostProcess, BeanPostProcess初始化属性值, InstantiationAwareBeanPostProcessor相当于实例化处理, 两个处于不同的阶段
+			// 不需要代理继续向下执行, 反射生成
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -541,7 +542,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		try {
-			// 创建bean
+			// 通过反射的方式创建bean
 			Object beanInstance = doCreateBean(beanName, mbdToUse, args);
 			if (logger.isTraceEnabled()) {
 				logger.trace("Finished creating instance of bean '" + beanName + "'");
@@ -1142,8 +1143,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
+					// spring 扩展会在, 实例化和初始化调用beanPostProcessors, bean的不同阶段进行扩展
+					// Instantiation此刻处于实例化, 从设计角度来讲如果填充属性肯定要先(new一个对象), 然后再填充属性值
+					// 初始化阶段如果需要代理直接生成代理对象的实例, 后续才能进行属性的填充
+					// @value 和 @AutoWried 都是属于成员变量, 属于属性填充, 在populateBean阶段就会填充进去了, 当然这个阶段也是可以扩展的
+					// 属性值填充之后再初始化(init-method, postConstruct), 初始化进行扩展也是利用了BeanPostProcessors, 可以对属性值进行修改
+
+					// 看代码前置可以生成自定义的代理, 待确认 ?
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
 					if (bean != null) {
+						// 后置会直接会判断当前bean是否会生成代理类 , 感觉都会生成代理呢,有网再去确认
 						bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
 					}
 				}

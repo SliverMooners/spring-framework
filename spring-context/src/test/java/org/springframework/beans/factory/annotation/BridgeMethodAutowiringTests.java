@@ -60,6 +60,9 @@ class BridgeMethodAutowiringTests {
 
 	@Component("userObject")
 	public static class Foo {
+		static {
+			System.out.println("fanc test------------");
+		}
 	}
 
 }
