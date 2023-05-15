@@ -107,6 +107,12 @@ public class TransactionInterceptor extends TransactionAspectSupport implements 
 	}
 
 
+	/**
+	 * 事务的入口, 每个方法都会被拦截进行判断
+	 * @param invocation the method invocation joinpoint
+	 * @return
+	 * @throws Throwable
+	 */
 	@Override
 	@Nullable
 	public Object invoke(MethodInvocation invocation) throws Throwable {

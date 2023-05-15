@@ -17,7 +17,6 @@ public class SayAutowiredHelloServiceImpl implements ISayHelloService{
 	public void add() {
 		System.out.println("------------------------");
 		System.out.println("Autowired 填充属性");
-		sayHelloService.say();
 		System.out.println("------------------------");
 	}
 

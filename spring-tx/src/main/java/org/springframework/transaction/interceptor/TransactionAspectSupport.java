@@ -339,6 +339,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		// If the transaction attribute is null, the method is non-transactional.
 		TransactionAttributeSource tas = getTransactionAttributeSource();
 		final TransactionAttribute txAttr = (tas != null ? tas.getTransactionAttribute(method, targetClass) : null);
+		// 获取事务管理器, 没有获取默认的
 		final TransactionManager tm = determineTransactionManager(txAttr);
 
 		if (this.reactiveAdapterRegistry != null && tm instanceof ReactiveTransactionManager) {

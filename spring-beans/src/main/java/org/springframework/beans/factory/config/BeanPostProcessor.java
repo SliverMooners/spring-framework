@@ -96,6 +96,13 @@ public interface BeanPostProcessor {
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet
 	 * @see org.springframework.beans.factory.FactoryBean
 	 */
+	/**
+	 * 生成代理bean->AbstractAutoProxyCreator
+	 * @param bean
+	 * @param beanName
+	 * @return
+	 * @throws BeansException
+	 */
 	@Nullable
 	default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;

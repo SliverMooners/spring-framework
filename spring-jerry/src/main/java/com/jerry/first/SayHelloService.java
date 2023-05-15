@@ -13,12 +13,6 @@ public class SayHelloService {
 	@Autowired
 	ISayHelloService sayAutowiredHelloServiceImpl;
 
-	SayHelloSetService sayHelloSetService;
-
-	public void setSayHelloSetService(SayHelloSetService sayHelloSetService) {
-		this.sayHelloSetService = sayHelloSetService;
-	}
-
 	public void say() {
 		System.out.println("------------------------");
 		System.out.println("您好, 欢迎使用...");

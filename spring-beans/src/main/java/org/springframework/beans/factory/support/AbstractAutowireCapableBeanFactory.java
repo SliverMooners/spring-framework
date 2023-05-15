@@ -628,6 +628,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			populateBean(beanName, mbd, instanceWrapper);
 			// 初始化, aware接口执行,init-method, postConstruct > afterPropertiesSet(实现InitializingBean) > init方法
 			// BeanPostProcessor执行对bean的扩展, before和after
+			// 正确的代理会在这里进行调用, 不是在实例化之后就进行初始化, 之前的想法存在一些问题, 在初始化完成后会对spring的bean进行判断, 当前bean是否需要生成代理, 如果需要直接将代理bean存入ioc,
+			// 原生对象和代理对象会同时存在
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
@@ -1150,6 +1152,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					// 属性值填充之后再初始化(init-method, postConstruct), 初始化进行扩展也是利用了BeanPostProcessors, 可以对属性值进行修改
 
 					// 看代码前置可以生成自定义的代理, 待确认 ?
+
+					// 修正
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
 					if (bean != null) {
 						// 后置会直接会判断当前bean是否会生成代理类 , 感觉都会生成代理呢,有网再去确认
