@@ -1,6 +1,8 @@
-package com.jerry.first;
+package com.jerry.first.service;
 
 
+import com.jerry.first.SayHelloService;
+import com.jerry.first.service.ISayHelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @author fanc
  */
 @Service
-public class SayAutowiredHelloServiceImpl implements ISayHelloService{
+public class SayAutowiredHelloServiceImpl implements ISayHelloService {
 
 	@Autowired
 	SayHelloService sayHelloService;

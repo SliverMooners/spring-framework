@@ -1,4 +1,4 @@
-package com.jerry.first;
+package com.jerry.first.beanfactory;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
