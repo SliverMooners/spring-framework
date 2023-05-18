@@ -23,8 +23,17 @@ public class MyAdvice {
 	@Pointcut("execution(void com.jerry.first.aop.NeedAopServiceImpl.aopDel())")
 	public void ptInsert(){}
 
+
+	@Pointcut("execution(void com.jerry.first.aop.NeedAopCglibService.needProxy())")
+	public void ptAdd(){}
+
 	@Before("ptUpdate()")
 	public void methodBefore(){
+		System.out.println(System.currentTimeMillis());
+	}
+
+	@Before("ptAdd()")
+	public void methodBefore1(){
 		System.out.println(System.currentTimeMillis());
 	}
 

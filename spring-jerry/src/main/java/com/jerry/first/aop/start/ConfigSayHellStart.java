@@ -1,5 +1,6 @@
 package com.jerry.first.aop.start;
 
+import com.jerry.first.aop.NeedAopCglibService;
 import com.jerry.first.aop.NeedAopService;
 import com.jerry.first.aop.NoNeedAopService;
 import com.jerry.first.config.SpringConfig;
@@ -13,7 +14,7 @@ public class ConfigSayHellStart {
 
 
 
-		//以下代码由$Proxy0.class反编译得到
+		//      以下代码由$Proxy0.class反编译得到
 		//		public final class $Proxy0 extends Proxy implements PorxyInte {
 		//			private static Method m3;
 		//
@@ -42,6 +43,10 @@ public class ConfigSayHellStart {
 		System.out.println(noNeedAopService);
 		System.out.println(noNeedAopService.getClass());
 		noNeedAopService.noAopAdd();
+		final NeedAopCglibService needAopCglibService = annotation.getBean(NeedAopCglibService.class);
+		System.out.println(needAopCglibService);
+		System.out.println(needAopCglibService.getClass());
+		needAopCglibService.needProxy();
 	}
 
 }
