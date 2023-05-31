@@ -627,7 +627,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// 属性填充 , @Autowired @Value 成员变量就是在这里填充, 在这里发现成员变量(属性)还没初始化, 进行初始化,然后填充到需要的bean
 			// InstantiationAwareBeanPostProcessor 处理
 			populateBean(beanName, mbd, instanceWrapper);
-			// 初始化, aware接口执行,init-method, postConstruct > afterPropertiesSet(实现InitializingBean) > init方法
+			// 初始化, aware接口执行,init-method, postConstruct > afterPropertiesSet(实现InitializingBean) > init方法, 很重要, 如果没有注入其他的bean, 不会提前生成代理
+			// 会导致需要切面或者事务失效, 解决办法是注入自身
 			// BeanPostProcessor执行对bean的扩展, before和after
 			// 正确的代理会在这里进行调用, 不是在实例化之后就进行初始化, 之前的想法存在一些问题, 在初始化完成后会对spring的bean进行判断, 当前bean是否需要生成代理, 如果需要直接将代理bean存入ioc,
 			// 原生对象和代理对象会同时存在

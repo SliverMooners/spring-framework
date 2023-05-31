@@ -599,7 +599,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// 实例化bean Initialization 初始化-> bean创建了, 属性填充;  Instantiation 实例化: 此时bean还没生成, 可以对bean进行扩展, 生成代理的bean, 也可以在初始化之前对属性进行修改,
 				// 1. 实例化 InstantiationAwareBeanPostProcessor 接口可以对扩展实例化的bean, 实现了BeanPostProcess, 前置方法会会返回一个实例bean修改beanDefinition属性,
 				// 后续流程会根据当前属性进行判断, 是否对相应的属性填充进行扩展(得@AutoWired{value})
-				// 2. 属性填充 populateBean, @Autowired @value
+				// 2. 属性填充 populateBean, @Autowired @value @PostConstruct
 				// 3. initializeBean 初始化相关属性值, 例如init , afterPropertiesSet, aware接口set
 				finishBeanFactoryInitialization(beanFactory);
 

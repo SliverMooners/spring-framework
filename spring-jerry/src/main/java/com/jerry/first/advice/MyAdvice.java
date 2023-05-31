@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author fanc
  * 需要引入   optional("org.aspectj:aspectjweaver")  这玩意好像就是运行时的包
+ * 记录: 1. @PostContrust 会在populateBean后执行, 但是此时还没有生成代理
  */
 @Component
 @Aspect
