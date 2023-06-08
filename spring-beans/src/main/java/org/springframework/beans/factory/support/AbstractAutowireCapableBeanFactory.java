@@ -1817,11 +1817,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object wrappedBean = bean;
 		if (mbd == null || !mbd.isSynthetic()) {
-			// 初始化之前对bean的扩展, 注意@value注解的属性不是在这里填充的, 是在populateBean填充的
+			// 初始化之前对bean的扩展, 注意@value注解的属性不是在这里填充的, 是在populateBean填充的, @PostConstruct 在这里执行
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 
 		try {
+			// (InitializingBean)afterPropertiesSet 和 initMethod 在这里执行
 			invokeInitMethods(beanName, wrappedBean, mbd);
 		}
 		catch (Throwable ex) {
@@ -1869,30 +1870,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	protected void invokeInitMethods(String beanName, Object bean, @Nullable RootBeanDefinition mbd)
 			throws Throwable {
 
-		// InitializingBean afterPropertiesSet 可以对bean初始化之前做一些处理
-		// 构造方法 > postConstruct > afterPropertiesSet(实现InitializingBean) > init方法
-		//		@Component
-		//		public class MyInitializingBean implements InitializingBean {
-		//			public MyInitializingBean() {
-		//				System.out.println("我是MyInitializingBean构造方法执行...");
-		//			}
-		//			@Override
-		//			public void afterPropertiesSet() throws Exception {
-		//				System.out.println("我是afterPropertiesSet方法执行...");
-		//			}
-		//			@PostConstruct // 这个应该在BeanPostProcessor时候before执行的, 待确认?
-		//			public void postConstruct() {
-		//				System.out.println("我是postConstruct方法执行...");
-		//			}
-		//			public void init(){
-		//				System.out.println("我是init方法执行...");
-		//			}
-		//			@Bean(initMethod = "init")
-		//			public MyInitializingBean test() {
-		//				return new MyInitializingBean();
-		//			}
-		//		}
-
 		boolean isInitializingBean = (bean instanceof InitializingBean);
 		if (isInitializingBean && (mbd == null || !mbd.hasAnyExternallyManagedInitMethod("afterPropertiesSet"))) {
 			if (logger.isTraceEnabled()) {
@@ -1919,6 +1896,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			if (StringUtils.hasLength(initMethodName) &&
 					!(isInitializingBean && "afterPropertiesSet".equals(initMethodName)) &&
 					!mbd.hasAnyExternallyManagedInitMethod(initMethodName)) {
+				// @Bean(initMethod = "init")在这里执行, 用处不大感觉, 不如在@Bean的方法内直接扩展
 				invokeCustomInitMethod(beanName, bean, mbd);
 			}
 		}
