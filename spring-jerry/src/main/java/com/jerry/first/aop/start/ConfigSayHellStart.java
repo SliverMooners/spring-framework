@@ -35,18 +35,18 @@ public class ConfigSayHellStart {
 //		}
 
 
-//		System.out.println(needAopService);
-//		System.out.println(needAopService.getClass());
-//		needAopService.aopAdd();
-//		System.out.println("--------------------------------------");
-//		final NoNeedAopService noNeedAopService = annotation.getBean(NoNeedAopService.class);
-//		System.out.println(noNeedAopService);
-//		System.out.println(noNeedAopService.getClass());
-//		noNeedAopService.noAopAdd();
-//		final NeedAopCglibService needAopCglibService = annotation.getBean(NeedAopCglibService.class);
-//		System.out.println(needAopCglibService);
-//		System.out.println(needAopCglibService.getClass());
-//		needAopCglibService.needProxy();
+		System.out.println(needAopService);
+		System.out.println(needAopService.getClass());
+		needAopService.aopAdd();
+		System.out.println("--------------------------------------");
+		final NoNeedAopService noNeedAopService = annotation.getBean(NoNeedAopService.class);
+		System.out.println(noNeedAopService);
+		System.out.println(noNeedAopService.getClass());
+		noNeedAopService.noAopAdd();
+		final NeedAopCglibService needAopCglibService = annotation.getBean(NeedAopCglibService.class);
+		System.out.println(needAopCglibService);
+		System.out.println(needAopCglibService.getClass());
+		needAopCglibService.needProxy();
 	}
 
 }

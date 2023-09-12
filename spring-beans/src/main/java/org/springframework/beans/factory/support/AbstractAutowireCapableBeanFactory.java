@@ -611,6 +611,18 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Eagerly cache singletons to be able to resolve circular references
 		// even when triggered by lifecycle interfaces like BeanFactoryAware.
 		// 防止循环依赖, 将生产对象的工厂放入第三级缓存中
+		// 如果是单例、允许循环依赖、对象正在创建中
+		// 缓存解决循环依赖的思路有两种：
+		//
+		//第一种：不管有没有循环依赖，都提前创建好代理对象，并将代理对象放入缓存。出现循环依赖时，其它对象直接就可以取到代理对象并注入，两个级别的缓存就够了。
+		//
+		//第二种：不提前创建好代理对象，在出现循环依赖被其它对象注入时，才实时生成代理对象。
+		//
+		//Spring选择了后一种，如果使用两个缓存解决循环依赖，意味着Bean在构造完成后就创建代理对象，这样就违背了Spring的设计原则。
+		// Spring结合AOP和Bean的生命周期,是在Bean创建完成之后通过AnnotationAwareAspectJAutoProxyCreator这个后置处理器来完成的，
+		// 在这个后置处理器的postProcessAfterInitialization方法中对初始化后的Bean完成AOP代理。
+		// 使用第一种方案如果出现了循环依赖，那没有办法，只有先给Bean先创建代理，
+		// 但是在Spring设计之初就是让Bean在生命周期的最后一步完成代理而不是在实例化之后就立马完成代理。
 		boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
 				isSingletonCurrentlyInCreation(beanName));
 		if (earlySingletonExposure) {
