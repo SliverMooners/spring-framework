@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 public class MyAdvice {
 
 
-	@Pointcut("execution(void com.jerry.first.aop.NeedAopServiceImpl.aopAdd())")
+	@Pointcut("execution(void com.jerry.first.aop.NeedAopService.aopAdd())")
 	public void ptUpdate(){
 
 	}
 
-	@Pointcut("execution(void com.jerry.first.aop.NeedAopServiceImpl.aopDel())")
+	@Pointcut("execution(void com.jerry.first.aop.NeedAopService.aopDel())")
 	public void ptInsert(){}
 
 
