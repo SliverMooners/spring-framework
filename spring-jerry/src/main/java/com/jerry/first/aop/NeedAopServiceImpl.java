@@ -14,11 +14,16 @@ public class NeedAopServiceImpl implements NeedAopService{
 
 	@Override
 	public void aopAdd() {
-		needAopCglibService.needProxy();
+		System.out.println("----------aop add------------");
 	}
 
 	@Override
 	public void aopDel() {
 
+	}
+
+	@Override
+	public void noAopMethod() {
+		this.aopAdd();
 	}
 }

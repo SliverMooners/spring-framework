@@ -37,8 +37,9 @@ public class ConfigSayHellStart {
 
 		System.out.println(needAopService);
 		System.out.println(needAopService.getClass());
+		needAopService.noAopMethod();
+		System.out.println("==========================");
 		needAopService.aopAdd();
-		System.out.println("--------------------------------------");
 		final NoNeedAopService noNeedAopService = annotation.getBean(NoNeedAopService.class);
 		System.out.println(noNeedAopService);
 		System.out.println(noNeedAopService.getClass());
@@ -48,5 +49,14 @@ public class ConfigSayHellStart {
 		System.out.println(needAopCglibService.getClass());
 		needAopCglibService.needProxy();
 	}
+
+	/**
+	 *
+	 * Spring
+	 * 首先Spring 起到的作用就是管理bean, 对bean做些扩展像事务和切面, 其实就是对bean方法的扩展避免代码重复
+	 * bean定义的方式 (xml和注解), 不同的方式采用不用的beanDefinition去接收, 扫描方式也不一样, 在实例化前肯定要抓化为唯一类型的BeanDefinition去接收才能一步一步向下传递,
+	 * 多种类型传递处理和扩展太不方便
+	 *
+	 */
 
 }

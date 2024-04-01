@@ -30,12 +30,12 @@ public class MyAdvice {
 
 	@Before("ptUpdate()")
 	public void methodBefore(){
-		System.out.println(System.currentTimeMillis());
+		System.out.println("----------add advice------------");
 	}
 
 	@Before("ptAdd()")
 	public void methodBefore1(){
-		System.out.println(System.currentTimeMillis());
+		System.out.println("----------add advice------------");
 	}
 
 
