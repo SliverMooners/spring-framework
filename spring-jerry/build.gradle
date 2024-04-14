@@ -10,11 +10,25 @@ repositories {
 }
 
 dependencies {
+    implementation "mysql:mysql-connector-java:8.0.12"
+    implementation "com.alibaba:druid:1.1.10"
+
+    implementation "org.mybatis:mybatis:3.5.7"
+    implementation "org.mybatis:mybatis-spring:2.0.7"
+
+
+    implementation "ognl:ognl:3.2.15"
+    implementation "org.javassist:javassist:3.27.0-GA"
+
+    implementation(project(":spring-core"))
     optional("org.aspectj:aspectjweaver")
-    api(project(":spring-context"))
     optional("javax.annotation:javax.annotation-api")
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    optional(project(":spring-aop"))
+    optional(project(":spring-beans"))
+    optional(project(":spring-context"))
+    optional(project(":spring-jdbc"))
+    optional(project(":spring-orm"))
+    optional(project(":spring-tx"))
 }
 
 test {

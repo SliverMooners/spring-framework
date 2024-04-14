@@ -14,7 +14,7 @@ public class NeedAopServiceImpl implements NeedAopService{
 
 	@Override
 	public void aopAdd() {
-		needAopCglibService.needProxy();
+		System.out.println("-----------> aopAdd");
 	}
 
 	@Override
