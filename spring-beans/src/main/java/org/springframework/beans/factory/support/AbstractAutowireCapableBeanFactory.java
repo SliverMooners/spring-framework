@@ -623,6 +623,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// 在这个后置处理器的postProcessAfterInitialization方法中对初始化后的Bean完成AOP代理。
 		// 使用第一种方案如果出现了循环依赖，那没有办法，只有先给Bean先创建代理，
 		// 但是在Spring设计之初就是让Bean在生命周期的最后一步完成代理而不是在实例化之后就立马完成代理。
+		// 单例正在创建循环引用
 		boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
 				isSingletonCurrentlyInCreation(beanName));
 		if (earlySingletonExposure) {
