@@ -36,8 +36,8 @@ public class MyInitializingBean implements InitializingBean {
 	}
 
 	@Bean(initMethod = "initTest")
-	public MyInitializingBean test() {
-		return new MyInitializingBean("我是测试啊");
+	public void test() {
+		System.out.println("我是postConstruct方法执行...");
 	}
 
 	public void initTest() {

@@ -14,6 +14,8 @@ public class SpringMyBatisMainTest {
 
 		Employee employee = employeeService.getEmployeeById(1);
 
+		employeeService.add();
+
 		System.out.println(employee);
 
 	}

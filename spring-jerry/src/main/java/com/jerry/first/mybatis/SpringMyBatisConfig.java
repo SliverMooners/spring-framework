@@ -19,7 +19,7 @@ import java.io.IOException;
 @MapperScan("com.jerry.first.mybatis")
 public class SpringMyBatisConfig {
 
-	// 数据源
+
 	@Bean("dataSource")
 	public DataSource dataSource(){
 		System.out.println("初始化数据源 DruidDataSource ");
@@ -38,13 +38,13 @@ public class SpringMyBatisConfig {
 		return druidDataSource;
 	}
 
-	// 事物管理器
+
 	@Bean
 	public TransactionManager transactionManager(){
 		return new DataSourceTransactionManager(dataSource());
 	}
 
-	// SqlSeesion工厂Bean
+
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();

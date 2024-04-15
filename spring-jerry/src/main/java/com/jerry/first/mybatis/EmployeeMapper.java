@@ -6,4 +6,10 @@ public interface EmployeeMapper {
 
 	public Employee getEmployeeById(@Param("id") Integer id);
 
+	/**
+	 * 添加
+	 */
+	void add(Employee employee);
+
+
 }
