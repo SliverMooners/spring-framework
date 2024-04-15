@@ -21,7 +21,6 @@ dependencies {
     implementation "org.javassist:javassist:3.27.0-GA"
 
     implementation(project(":spring-core"))
-    optional("org.aspectj:aspectjweaver")
     optional("javax.annotation:javax.annotation-api")
     optional(project(":spring-aop"))
     optional(project(":spring-beans"))
@@ -29,6 +28,7 @@ dependencies {
     optional(project(":spring-jdbc"))
     optional(project(":spring-orm"))
     optional(project(":spring-tx"))
+    optional(project(":spring-aspects"))
 }
 
 test {

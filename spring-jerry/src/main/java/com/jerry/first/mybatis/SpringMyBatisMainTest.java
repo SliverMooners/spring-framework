@@ -10,13 +10,9 @@ public class SpringMyBatisMainTest {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(SpringMyBatisConfig.class);
 
-		EmployeeService employeeService = context.getBean(EmployeeService.class);
+		EmployeeManager employeeService = context.getBean(EmployeeManager.class);
 
-		Employee employee = employeeService.getEmployeeById(1);
-
-		employeeService.add();
-
-		System.out.println(employee);
+		employeeService.get();
 
 	}
 }
