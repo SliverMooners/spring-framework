@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 public class EmployeeManager {
 
 	@Autowired
-	EmployeeService employeeServiceImpl;
+	EmployeeService employeeService;
 
 	public void get() {
-		employeeServiceImpl.add();
-		final Employee em = employeeServiceImpl.getEmployeeById(1);
+		employeeService.add();
+		final Employee em = employeeService.getEmployeeById(1);
 		System.out.println(em.toString());
 
 	}
