@@ -12,6 +12,7 @@ public class XmlSayHelloStart {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
 		final SayHelloService sayHelloService = context.getBean(SayHelloService.class);
+
 		sayHelloService.say();
 	}
 
